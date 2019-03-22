@@ -1,1 +1,24 @@
-{}
+{
+  "name": "melonjs-game",
+  "main": "main.js",
+  "version": "0.0.1",
+  "description": "testing grunt development tools",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silconsystem/melonJS-game.git"
+  },
+  "licence": "MIT",
+  "bugs": {
+    "url": "https://github.com/silconsystem/melonJS-game/issues"
+  },
+  "homepage": "https://github.com/silconsystem/melonJS-game#readme",
+  "dependencies": {
+    "grunt": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "author": "trev van arden",
+  "license": "ISC"
+}

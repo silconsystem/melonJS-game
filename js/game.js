@@ -17,21 +17,35 @@ var game = {
             return;
         }
 
-        // Initialize the audio.
-        me.audio.init("mp3,ogg");
+        // add "#debug" to the URL to enable the debug Panel
+        if (me.game.HASH.debug === true) {
+            window.onReady(function () {
+                me.plugin.register.defer(this, me.debug.Panel, "debug", me.input.KEY.V);
+            });
+        }
 
-        // set and load all resources.
-        // (this will also automatically switch to the loading screen)
-        me.loader.preload(game.resources, this.loaded.bind(this));
+        // Set a callback to run when loading is complete.
+        me.loader.onload = this.loaded.bind(this);
+
+        // Load the resources.
+        me.loader.preload(game.resources);
+
+        // Initialize melonJS and display a loading screen.
+        me.state.change(me.state.LOADING);
     },
 
     // Run on game resources loaded.
     "loaded" : function () {
-        me.state.set(me.state.MENU, new game.TitleScreen());
+        // register player
+        me.pool.register("player", game.Player);
+        me.pool.register("fairy-blue", game.Enemy);
+        //me.state.set(me.state.MENU, new game.TitleScreen());
+        // set the "Play/Ingame" Screen Object
+        this.playScreen = new game.PlayScreen();
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // add our player entity in the entity pool
-        me.pool.register("mainPlayer", game.PlayerEntity);
+        //me.pool.register("mainPlayer", game.PlayerEntity);
 
         // Start the game.
         me.state.change(me.state.PLAY);
